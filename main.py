@@ -4,20 +4,15 @@ from pydantic import BaseModel
 from datetime import datetime
 
 app = FastAPI()
-
 # In-memory database to store request and response details
 database = []
-
-
 class MatrixInput(BaseModel):
     matrix: List[List[int]]
-
 
 @app.post("/largest_rectangle")
 def largest_rectangle(matrix_input: MatrixInput):
     try:
         matrix = matrix_input.matrix
-
         rows, cols = len(matrix), len(matrix[0])
 
         def largest_area(heights):
@@ -31,7 +26,7 @@ def largest_rectangle(matrix_input: MatrixInput):
                 else:
                     top = stack.pop()
                     width = i if not stack else i - stack[-1] - 1
-                    max_area = max(max_area, heights[top] * (width + 1))
+                    max_area = max(max_area, heights[top] * (width + 1 ))
             while stack:
                 top = stack.pop()
                 width = i if not stack else i - stack[-1] - 1
